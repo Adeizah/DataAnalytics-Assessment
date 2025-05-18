@@ -13,7 +13,7 @@ JOIN savings_savingsaccount as savings
 WHERE (is_a_fund = 1 or is_regular_savings = 1)
 	and confirmed_amount > 0
 	)
-SELECT -- Manking the calculated columns for full name, savings_count, investment_count, and total_deposits using users table and the CTE above
+SELECT -- Making the calculated columns for full name, savings_count, investment_count, and total_deposits using users table and the CTE above
 	owner_id,
 	concat(first_name," ",last_name) as name,
 	count(distinct case when funded_plans.is_regular_savings = 1 then funded_plans.plan_id end) as savings_count,
