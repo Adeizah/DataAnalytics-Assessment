@@ -7,12 +7,12 @@ WITH funded_plans as ( -- Creating CTE to retrieve funded savings and investment
 		is_a_fund,
 		is_regular_savings,
 		confirmed_amount
-FROM plans_plan as plans
-JOIN savings_savingsaccount as savings
-	ON plans.id = savings.plan_id
-WHERE (is_a_fund = 1 or is_regular_savings = 1)
-	and confirmed_amount > 0
-	)
+	FROM plans_plan as plans
+	JOIN savings_savingsaccount as savings
+		ON plans.id = savings.plan_id
+	WHERE (is_a_fund = 1 or is_regular_savings = 1)
+		and confirmed_amount > 0
+)
 SELECT -- Making the calculated columns for full name, savings_count, investment_count, and total_deposits using users table and the CTE above
 	owner_id,
 	concat(first_name," ",last_name) as name,
