@@ -3,10 +3,10 @@
 WITH funded_plans as ( -- Creating CTE to retrieve funded savings and investment plans using plans and savings tables
 	SELECT 
 		plans.owner_id,
-	    plan_id,
-	    is_a_fund,
-	    is_regular_savings,
-	    confirmed_amount
+		plan_id,
+		is_a_fund,
+		is_regular_savings,
+		confirmed_amount
 FROM plans_plan as plans
 JOIN savings_savingsaccount as savings
 	ON plans.id = savings.plan_id
