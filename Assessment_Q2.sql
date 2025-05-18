@@ -1,6 +1,10 @@
 -- Calculate the average number of transactions per customer per month and categorize them
 
-with frequency_cases as (
+SELECT 
+	frequency_category, 
+	count(frequency_category) as customer_count,
+    round(avg(avg_monthly_transactions),1) as avg_transactions_per_month
+FROM (
 	SELECT 
 		users.id as owner_id, 
 		(count(savings_id)/12) as avg_monthly_transactions,
@@ -13,10 +17,5 @@ with frequency_cases as (
 		ON users.id = savings.owner_id
 	WHERE confirmed_amount > 0
 	GROUP BY users.id
-)
-SELECT 
-	frequency_category, 
-	count(frequency_category) as customer_count,
-    round(avg(avg_monthly_transactions),1) as avg_transactions_per_month
-FROM frequency_cases
+	) as sub
 GROUP BY frequency_category;
