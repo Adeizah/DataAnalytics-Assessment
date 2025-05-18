@@ -3,7 +3,7 @@
 SELECT 
 	frequency_category, 
 	count(frequency_category) as customer_count,
-    round(avg(avg_monthly_transactions),1) as avg_transactions_per_month
+	round(avg(avg_monthly_transactions),1) as avg_transactions_per_month
 FROM (
 	SELECT 
 		users.id as owner_id, 
@@ -11,7 +11,8 @@ FROM (
 		case
 			when (count(users.id)/12) <= 2 then "Low Frequency"
 			when (count(users.id)/12) <= 9 then "Medium Frequency"
-			else "High Frequency" end as frequency_category
+			else "High Frequency" 
+		end as frequency_category
 	FROM users_customuser as users
 	JOIN savings_savingsaccount as savings
 		ON users.id = savings.owner_id
