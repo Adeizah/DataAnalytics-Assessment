@@ -2,13 +2,13 @@
 
 SELECT
 	plans.id as plan_id, 
-    plans.owner_id,
-    case 
+	plans.owner_id,
+	case 
 		when is_regular_savings = 1 then "Savings"
-        else "Investment"
+        	else "Investment"
 	end as type,
-    date(max(transaction_date)) as last_transaction_date,
-    datediff(current_date(), max(transaction_date)) as inactivity_days
+	date(max(transaction_date)) as last_transaction_date,
+	datediff(current_date(), max(transaction_date)) as inactivity_days
 FROM plans_plan as plans
 JOIN savings_savingsaccount as savings
 	ON plans.id = savings.plan_id
