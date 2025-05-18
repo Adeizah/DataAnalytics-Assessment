@@ -1,6 +1,6 @@
 -- Find customers with at least one funded savings plan AND one funded investment plan, sorted by total deposits.
 
-WITH funded_plans as (
+WITH funded_plans as ( -- Creating CTE to retrieve funded savings and investment plans using plans and savings tables
 	SELECT 
 		plans.owner_id,
     plan_id,
@@ -13,7 +13,7 @@ WITH funded_plans as (
   WHERE (is_a_fund = 1 or is_regular_savings = 1)
 		and confirmed_amount > 0
 )
-SELECT 
+SELECT -- Manking the calculated columns for full name, savings_count, investment_count, and total_deposits using users table and the CTE above
 	owner_id,
   concat(first_name," ",last_name) as name,
 	count(distinct case when funded_plans.is_regular_savings = 1 then funded_plans.plan_id end) as savings_count,
