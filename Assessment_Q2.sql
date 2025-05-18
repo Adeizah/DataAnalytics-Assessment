@@ -1,11 +1,11 @@
 -- Calculate the average number of transactions per customer per month and categorize them
 
-SELECT 
+SELECT  -- Outer query to reaggregate nested query based on the categories
 	frequency_category, 
 	count(frequency_category) as customer_count,
 	round(avg(avg_monthly_transactions),1) as avg_transactions_per_month
 FROM (
-	SELECT 
+	SELECT   -- Nested query to first categorize the users into Low, Medium, and High Frequency users
 		users.id as owner_id, 
 		(count(savings_id)/12) as avg_monthly_transactions,
 		case
